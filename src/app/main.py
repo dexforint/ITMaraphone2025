@@ -1,5 +1,7 @@
 import os
 import logging
+from typing import Any
+
 import httpx
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, status
@@ -12,6 +14,7 @@ from .models import (
     PatchBody,
     NotificationBody,
 )
+from .state import STATE
 
 
 # ---------------------------------------------------------------
@@ -37,10 +40,6 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Final API", lifespan=lifespan)
 
 
-# ---------------------------------------------------------------
-from .state import STATE
-
-
 @app.post(
     "/inputs", responses={200: {"model": InputRespOk}, 400: {"model": InputRespBad}}
 )
@@ -57,9 +56,6 @@ def create_task(body: TaskBody):
     STATE.last_task = body
     STATE.result_received = False
     return TaskResp(answer="Да")
-
-
-from typing import Any
 
 
 @app.patch("/tasks/last")
