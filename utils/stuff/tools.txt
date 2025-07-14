@@ -1,0 +1,14 @@
+# Audio from Video
+https://extract-audio-online.com/ru
+
+# Audio separation
+https://huggingface.co/spaces/TheStinger/UVR5_UI
+
+# Audio to Text
+https://speech2text.ru/a-list?
+https://www.speech-to-text.cloud
+
+# Html to Text
+https://codebeautify.org/html-to-text-converter
+https://fileconverts.vercel.app/html/html-to-text/
+https://miniwebtool.com/ru/html-to-text-converter/

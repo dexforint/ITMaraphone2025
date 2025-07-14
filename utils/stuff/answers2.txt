@@ -1,0 +1,107 @@
+def subset_sum():
+    try:
+        # Шаг 1: Чтение входных данных
+        array_input = input().strip()
+        s_input = input().strip()
+        
+        # Проверяем корректность ввода
+        if not array_input or not s_input:
+            print("-1")
+            return
+        
+        array = list(map(int, array_input.split()))
+        s = int(s_input)
+        
+        # Проверяем, что все числа неотрицательные
+        if any(num < 0 for num in array) or s < 0:
+            print("-1")
+            return
+        
+        # Шаг 2: Создаем массив dp размером s+1 и заполняем нулями
+        dp = [0] * (s + 1)
+        dp[0] = 1  # Базовый случай: пустое подмножество дает сумму 0
+        
+        # Шаг 3: Заполняем массив dp
+        for number in array:
+            for j in range(s, number - 1, -1):
+                if dp[j - number] == 1:
+                    dp[j] = 1
+        
+        # Шаг 4: Выводим результат
+        print(dp[s])
+    
+    except Exception:
+        print("-1")
+
+if __name__ == "__main__":
+    subset_sum()
+
+##################
+def subset_sum(arr, target_sum):
+    dp = [0] * (target_sum + 1)
+    dp[0] = 1  # Базовый случай: пустое подмножество дает сумму 0
+    
+    for num in arr:
+        for j in range(target_sum, num - 1, -1):
+            if dp[j - num] == 1:
+                dp[j] = 1
+    
+    return dp[target_sum]
+
+try:
+    # Ввод данных
+    arr = list(map(int, input().strip().split()))
+    target_sum = int(input().strip())
+    
+    # Проверяем, что все числа неотрицательные
+    if any(num < 0 for num in arr) or target_sum < 0:
+        print(-1)
+    else:
+        result = subset_sum(arr, target_sum)
+        print(result)
+except Exception:
+    print(-1)
+
+
+##################
+import sys
+
+def main():
+    try:
+        # Считываем массив
+        array_line = sys.stdin.readline()
+        if not array_line:
+            raise ValueError
+        array_str = array_line.strip().split()
+        array = list(map(int, array_str))
+        if any(x < 0 for x in array):
+            raise ValueError
+
+        # Считываем сумму
+        s_line = sys.stdin.readline()
+        if not s_line:
+            raise ValueError
+        s = int(s_line.strip())
+        if s < 0:
+            raise ValueError
+
+    except Exception:
+        print(-1)
+        return
+
+    # Инициализация массива dp
+    dp = [0] * (s + 1)
+    dp[0] = 1  # Сумма 0 достижима пустым подмножеством
+
+    # Динамическое программирование
+    for number in array:
+        for j in range(s, number - 1, -1):
+            if dp[j - number] == 1:
+                dp[j] = 1
+
+    # Вывод результата
+    print(1 if dp[s] == 1 else 0)
+
+if __name__ == "__main__":
+    main()
+
