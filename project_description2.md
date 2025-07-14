@@ -463,24 +463,55 @@ None — стоим на месте.
 
 === Конец описания симуляции ===
 
-Твоя задача - тщательно обдумать и проанализировать финальное задание, продумать какое решение требуется написать. Напиши весь код для проекта. Так же напиши инструкции для запуска.
+Твоя задача - тщательно обдумать и проанализировать финальное задание, продумать какое решение требуется написать. Напиши весь код для проекта.
 
 Для выбора пути используй алгоритм BFS.
 
 В качестве решателя загадок Сфинкса используй Gigachat. Вот пример вызова:
 
 ```python
-# pip install gigachat
-import os
-from gigachat import GigaChat
+from openai import OpenAI
 
-# получаем модели
-with GigaChat(credentials=os.getenv("GIGA_AUTH"), verify_ssl_certs=False) as giga:
-    print(giga.get_models())
-
-with GigaChat(credentials=os.getenv("GIGA_AUTH"), model="GigaChat-2-Max", verify_ssl_certs=False) as giga:
-    response = giga.chat("Привет, мир!")
-    print(response.choices[0].message.content)
+client = OpenAI(api_key= "{token}",
+                base_url= "https://gigachat.devices.sberbank.ru/api/v1"
+                )
+completion = client.chat.completions.create(
+    model="GigaChat",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": "Hello World!"
+        }
+    ]
+)
+print(completion.choices[0].message)
 ```
 
 Старайся использовать последние версии библиотек.
+
+Текущее состояние проекта:
+
+```
+src/
+├── app/
+│   ├── __init__.py
+│   ├── api.py
+│   ├── models.py
+│   ├── state.py
+│   ├── solver.py
+│   └── gigachat.py
+├── main.py
+├── requirements.txt
+└── Dockerfile
+```
+
+```python
+# src/app/__init__.py
+
+```
+
+```python
+# src/app/__init__.py
+
+```
